@@ -1,0 +1,14 @@
+extends layout
+
+block content
+
+  div.flex.flex-wrap.mb-4.rounded.overflow-hidden.shadow-lg.bg-white
+    div.p-4.bg-white(class='w-2/3')
+      h3.font-bold.text-xl.mb-2= hardware.name
+      dl.margin
+        dt.text-grey-dark.text-sm Manufacturer
+        dd.font-semibold.ml-2= hardware.manufacturer
+        dt.text-grey-dark.text-sm Releasaed
+        dd.font-semibold.ml-2= hardware.released
+    div.bg-white(class='w-1/3')
+      img.w-full(src=`/uploads/${hardware.photo || 'placeholder.png'}`, alt=`Photo of ${hardware.name || 'missing image icon'}`)

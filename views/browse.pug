@@ -1,0 +1,8 @@
+extends layout
+
+include mixins/hardwareCard
+
+block content
+  .inner.flex.flex-wrap
+    each hardwareitem in hardware
+      +hardwareCard(hardwareitem)

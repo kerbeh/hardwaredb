@@ -1,0 +1,48 @@
+doctype html
+html.h-full
+  head
+    title=title
+    link(rel='stylesheet', href='/stylesheets/styles.bundle.css')
+  body.flex.flex-col.h-full.border-t-4.border-blue
+    nav.bg-white.flex.items-center.justify-between.flex-wrap.p-4.border-b.flex-no-shrink
+      div.flex.items-center.flex-no-shrink.text-blue-dark.mr-6
+        svg.fill-current.h-8.w-8.mr-2
+          use(xlink:href="images/icon.svg#logo")
+        span.font-semibold.text-xl.tracking-tight Test
+      div.block.lg_hidden
+        button.flex.items-center.px-3.py-2.border.rounded.text-blue-lighter.border-blue-light(class='hover:text-white hover:border-white')
+          svg.fill-current.h-3.w-3(viewbox='0 0 20 20', xmlns='http://www.w3.org/2000/svg')
+            title Menu
+            path(d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z')
+      div.w-full.block.flex-grow.lg_flex.lg_items-center.lg_w-auto
+        div.text-sm.lg_flex-grow
+          each link in helpers.menu
+            a.block.mt-4.text-blue.mr-4.lg_inline-block.lg_mt-0.no-underline.border-b-2.py-2.border-transparent.hover_border-blue-dark.hover_text-blue-dark(href=link.slug)
+              | #{link.title}
+
+    div#content.flex-1.bg-blue-lightest.todo-bg-controllers
+      //- Container starts here
+      div.container.mx-auto
+        h2.text-blue.pt-2 #{title}
+        block messages
+          if locals.flashes
+              div.flash-messages.max-w-sm.mx-auto
+                - const categories = Object.keys(locals.flashes)
+                each category in categories
+                  each message in flashes[category]
+                    div.max-w-sm.relative.flash(role='alert', class=`flash-${category}`).bg-blue-lighter.border-t-4.border-blue.rounded-b.text-blue-dark.px-4.py-3.mt-4.shadow-md
+                      div.flex.items-center
+                        div.py-1
+                          svg.fill-current.h-6.w-6.text-blue-dark.mr-4(xmlns='http://www.w3.org/2000/svg', viewbox='0 0 20 20')
+                            path(d='M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z')
+                        div
+                          p.text-sm.flash__text!= message
+                          span.absolute.pin-t.pin-b.pin-r.px-4.py-3.flash__remove(onClick="this.parentElement.parentElement.parentElement.remove()")
+                            svg.fill-current.h-6.w-6.text-red(role='button', xmlns='http://www.w3.org/2000/svg', viewbox='0 0 20 20')
+                              title Close
+                              path(d='M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z')
+        block content
+
+  footer.pin-b.bg-blue.p-6
+    p.text-white This is a paragraph in the footer
+

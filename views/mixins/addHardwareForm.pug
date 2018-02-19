@@ -1,0 +1,31 @@
+mixin hardwareForm(hardware = {})
+  div.max-w-md.mx-auto
+    form(action=`/add/${hardware._id || ""}` method="POST" enctype="multipart/form-data").bg-white.shadow-md.rounded.px-8.pt-6.pb-8.mb-4
+
+      div.mb-4
+        label.block.text-grey-darker.text-sm.font-bold.mb-2(for='name')
+          | Name
+        input#name.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-grey-darker(type='text',  name='name', placeholder='Name', value=hardware.name)
+      div.mb-4
+        label.block.text-grey-darker.text-sm.font-bold.mb-2(for='manufacturer')
+          | Manufacturer
+        input#manufacturer.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-grey-darker(type='text', name='manufacturer', placeholder='Manufacturer', value=hardware.manufacturer)
+      div.mb-4
+        - const currentYear = new Date().getFullYear()
+        label.block.text-grey-darker.text-sm.font-bold.mb-2(for='released')
+          | Released
+        input#manufacturer.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-grey-darker(type='number', name='released', value=hardware.released || 1990, min='1960' max=currentYear)
+      div.mb-4
+        label.block.text-grey-darker.text-sm.font-bold.mb-2(for='photo')
+          | Photo
+        input#name.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-grey-darker(type='file',  name='photo', accept="image/png, image/jpeg")
+      div.mb-4
+        - const tags = ["Clone", "Prototype", "Third-party", "Converged", "Licenesed", "Handheld"]
+        ul.flex.flex-wrap.px-4
+          each tag in tags
+            div.block.py-1.px-2.rounded-full.bg-blue-lighter.mr-1.mb-2
+              input(type="checkbox" id=tag value=tag name="tags")
+              label.ml-2.text-grey-darker.text-sm.font-bold(for=tag) #{tag}
+      div.flex.items-center.justify-between
+        input#submit.bg-blue.text-white.font-bold.py-2.px-4.rounded(class='hover:bg-blue-dark', type='submit', value='Save')
+

@@ -1,0 +1,8 @@
+@tailwind preflight;
+
+@tailwind utilities;
+
+.todo-bg-controllers {
+  background-image: url("/images/controller-pattern1.svg");
+  background-size: 350px;
+}
